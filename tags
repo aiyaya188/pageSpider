@@ -1,0 +1,75 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+BINARY_NAME	./makefile	/^BINARY_NAME= spider $/;"	m
+BINARY_UNIX	./makefile	/^BINARY_UNIX=$(BINARY_NAME)_linux$/;"	m
+GOBUILD	./makefile	/^GOBUILD=$(GOCMD) build$/;"	m
+GOCLEAN	./makefile	/^GOCLEAN=$(GOCMD) clean$/;"	m
+GOCMD	./makefile	/^GOCMD=go$/;"	m
+GOGET	./makefile	/^GOGET=$(GOCMD) get$/;"	m
+GOTEST	./makefile	/^GOTEST=$(GOCMD) test$/;"	m
+__construct	./cxExtractor/class.textExtract.php	/^	function __construct( $_url, $_blkSize = 3 ) {$/;"	f
+_blkSize	./cxExtractor/class.textExtract.php	/^	function __construct( $_url, $_blkSize = 3 ) {$/;"	v
+blkLen	./cxExtractor/class.textExtract.php	/^			$blkLen = $this->blksLen[$i - 1] + strlen( $this->textLines[$i - 1 + $this->blkSize] ) - strlen( $this->textLines[$i - 1] );$/;"	v
+blkLen	./cxExtractor/class.textExtract.php	/^		$blkLen = 0;$/;"	v
+blkNum	./cxExtractor/class.textExtract.php	/^		$blkNum = count( $this->blksLen );$/;"	v
+blkSize	./cxExtractor/class.textExtract.php	/^		$this->blkSize = $_blkSize;$/;"	v
+blkSize	./cxExtractor/class.textExtract.php	/^	public $blkSize;$/;"	v
+blksLen	./cxExtractor/class.textExtract.php	/^	public $blksLen     = array();$/;"	v
+calBlocksLen	./cxExtractor/class.textExtract.php	/^	function calBlocksLen() {$/;"	f
+content	./cxExtractor/class.textExtract.php	/^		$content = $this->rawPageCode;$/;"	v
+content	./cxExtractor/class.textExtract.php	/^		$content = preg_replace( $pattern, $replacement, $content );$/;"	v
+curTextLen	./cxExtractor/class.textExtract.php	/^			$curTextLen = 0;$/;"	v
+end	./cxExtractor/class.textExtract.php	/^				$end = $i - 1;$/;"	v
+getPageCode	./cxExtractor/class.textExtract.php	/^	function getPageCode() {$/;"	f
+getPlainText	./cxExtractor/class.textExtract.php	/^	function getPlainText() {$/;"	f
+getTextLines	./cxExtractor/class.textExtract.php	/^	function getTextLines( $rawText ) {$/;"	f
+i	./cxExtractor/class.textExtract.php	/^		$i = $maxTextLen = 0;$/;"	v
+i	./cxExtractor/class.textExtract.php	/^		for( $i = 0; $i < $this->blkSize; $i++ ) {$/;"	v
+i	./cxExtractor/class.textExtract.php	/^		for( $i = 1; $i < ($textLineNum - $this->blkSize); $i++ ) {$/;"	v
+iTextExtractor	./cxExtractor/demo.php	/^				$iTextExtractor = new textExtract( $_POST['url'] );$/;"	v
+iTextExtractor	./cxExtractor/pageExtract.php	/^$iTextExtractor = new textExtract($input);$/;"	v
+input	./cxExtractor/pageExtract.php	/^$input = $argv[1];$/;"	v
+isGB	./cxExtractor/class.textExtract.php	/^			$this->isGB = false;$/;"	v
+isGB	./cxExtractor/class.textExtract.php	/^			$this->isGB = true;$/;"	v
+isGB	./cxExtractor/class.textExtract.php	/^	public $isGB;$/;"	v
+lines	./cxExtractor/class.textExtract.php	/^		$lines = explode( '\\n', $rawText );$/;"	v
+maxTextLen	./cxExtractor/class.textExtract.php	/^				$maxTextLen = $curTextLen;$/;"	v
+order	./cxExtractor/class.textExtract.php	/^		$order = array( "\\r\\n", "\\n", "\\r" );$/;"	v
+pattern	./cxExtractor/class.textExtract.php	/^		$pattern = '\/&.{1,5};|&#.{1,5};\/';$/;"	v
+pattern	./cxExtractor/class.textExtract.php	/^		$pattern = '\/<!--.*?-->\/s';$/;"	v
+pattern	./cxExtractor/class.textExtract.php	/^		$pattern = '\/<!DOCTYPE.*?>\/si';$/;"	v
+pattern	./cxExtractor/class.textExtract.php	/^		$pattern = '\/<.*?>\/s';$/;"	v
+pattern	./cxExtractor/class.textExtract.php	/^		$pattern = '\/<script.*?>.*?<\\\/script>\/si';$/;"	v
+pattern	./cxExtractor/class.textExtract.php	/^		$pattern = '\/<style.*?>.*?<\\\/style>\/si';$/;"	v
+pattern	./cxExtractor/class.textExtract.php	/^		$pattern = '\/charset(\\s*?)=(\\s*?)(.*?)"\/i';$/;"	v
+portion	./cxExtractor/class.textExtract.php	/^			$portion = '';$/;"	v
+preProcText	./cxExtractor/class.textExtract.php	/^		$preProcText = $this->preProcess();$/;"	v
+preProcess	./cxExtractor/class.textExtract.php	/^	function preProcess() {$/;"	f
+procEncoding	./cxExtractor/class.textExtract.php	/^	function procEncoding() {$/;"	f
+rawPageCode	./cxExtractor/class.textExtract.php	/^			$this->rawPageCode = preg_replace( $pattern, $replacement, $this->rawPageCode );$/;"	v
+rawPageCode	./cxExtractor/class.textExtract.php	/^		$this->rawPageCode = file_get_contents( $this->url );$/;"	v
+rawPageCode	./cxExtractor/class.textExtract.php	/^	public $rawPageCode = '';$/;"	v
+rawText	./cxExtractor/class.textExtract.php	/^		$rawText = str_replace( $order, $replace, $rawText );$/;"	v
+replace	./cxExtractor/class.textExtract.php	/^		$replace = '\\n';$/;"	v
+replacement	./cxExtractor/class.textExtract.php	/^			$replacement = 'charset=GBK"';$/;"	v
+replacement	./cxExtractor/class.textExtract.php	/^		$replacement = '';$/;"	v
+start	./cxExtractor/class.textExtract.php	/^				$start = $tmp;$/;"	v
+start	./cxExtractor/class.textExtract.php	/^		$start = $end = -1;$/;"	v
+text	./cxExtractor/class.textExtract.php	/^				$this->text = $portion;$/;"	v
+text	./cxExtractor/class.textExtract.php	/^	public $text        = '';$/;"	v
+text	./cxExtractor/demo.php	/^				$text = $iTextExtractor->getPlainText();$/;"	v
+text	./cxExtractor/demo.php	/^				if( $iTextExtractor->isGB ) $text = iconv( 'GBK', 'UTF-8\/\/IGNORE', $text );$/;"	v
+text	./cxExtractor/pageExtract.php	/^$text = $iTextExtractor->getPlainText();$/;"	v
+text	./cxExtractor/pageExtract.php	/^if( $iTextExtractor->isGB ) $text = iconv( 'GBK', 'UTF-8\/\/IGNORE', $text );$/;"	v
+textExtract	./cxExtractor/class.textExtract.php	/^class textExtract {$/;"	c
+textLineNum	./cxExtractor/class.textExtract.php	/^		$textLineNum = count( $this->textLines );$/;"	v
+textLines	./cxExtractor/class.textExtract.php	/^	public $textLines   = array();$/;"	v
+tmp	./cxExtractor/class.textExtract.php	/^			$tmp = $i;$/;"	v
+tmp	./cxExtractor/class.textExtract.php	/^			$tmp = preg_replace( '\/\\s+\/s', '', $line );$/;"	v
+tmp	./cxExtractor/class.textExtract.php	/^		$tmp = substr( $matches[3], 0, 2 );$/;"	v
+url	./cxExtractor/class.textExtract.php	/^		$this->url = $_url;$/;"	v
+url	./cxExtractor/class.textExtract.php	/^	public $url         = '';$/;"	v
