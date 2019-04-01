@@ -207,7 +207,8 @@ class textExtract {
 			while( ($i < $blkNum) && ($this->blksLen[$i] != 0) ) {
 				if( $this->textLines[$i] != '' ) {
 					$portion .= $this->textLines[$i];
-					$portion .= '<br />';
+					//$portion .= '<br />';
+					$portion .= '.';
 					$curTextLen += strlen( $this->textLines[$i] );
 				}
 				$i++;

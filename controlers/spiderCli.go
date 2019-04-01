@@ -67,7 +67,9 @@ type SpiderCli struct {
 	netUtil    *NetUtils         //网络请求操作包
 	RequestMsg *SpiderRequstMsg  //请求格式包
 	ResponMsg  *SpiderResponMsg  //响应包
-	Articles   *ArticleObj
+	//Articles   *ArticleObj
+	*ArticleObj
+	*Utils
 	Abstrator
 }
 
@@ -76,14 +78,55 @@ func NewSpiderCli(db *database.DbEngin) *SpiderCli {
 	spiderCli := new(SpiderCli)
 	spiderCli.DB = db
 	spiderCli.netUtil = NewNetUtils()
+	spiderCli.Utils = new(Utils)
 	spiderCli.ResponMsg = new(SpiderResponMsg)
 	spiderCli.RequestMsg = new(SpiderRequstMsg)
 	//SpiderCli.Articles = new(Article)
-	spiderCli.Articles = NewArticle(spiderCli.DB)
+	//spiderCli.Articles = NewArticle(spiderCli.DB)
+	spiderCli.ArticleObj = NewArticle(spiderCli.DB)
 	//选择嵌入的提取正文接口
 	//spiderCli.Abstrator = &Url2Io{spiderCli.netUtil}
 	spiderCli.Abstrator = &BlockEx{}
 	return spiderCli
+}
+
+func (cli *SpiderCli) ProcessResponse() {
+	var articleSections []string
+	var addr []string
+	var section string
+	fmt.Println("process response")
+	if len(cli.ResponMsg.BaiduAddr) > 0 {
+		addr, _ = cli.Random(cli.ResponMsg.BaiduAddr, 1)
+		section = cli.GetContent(addr[0])
+		articleSections = append(articleSections, section)
+	}
+	if len(cli.ResponMsg.GoogleAddr) > 0 {
+		addr, _ = cli.Random(cli.ResponMsg.GoogleAddr, 1)
+		section = cli.GetContent(addr[0])
+		articleSections = append(articleSections, section)
+	}
+	if len(cli.ResponMsg.WeiXinAddr) > 0 {
+		addr, _ = cli.Random(cli.ResponMsg.WeiXinAddr, 1)
+		section = cli.GetContent(addr[0])
+		articleSections = append(articleSections, section)
+	}
+	if len(cli.ResponMsg.BiyingAddr) > 0 {
+		addr, _ = cli.Random(cli.ResponMsg.BiyingAddr, 1)
+		section = cli.GetContent(addr[0])
+		articleSections = append(articleSections, section)
+	}
+
+	fmt.Println("mix article")
+	cli.MixArticle(cli.ResponMsg.Keyword, articleSections)
+	fmt.Println("mix article end")
+}
+func (cli *SpiderCli) MixArticle(keyWord string, sections []string) {
+	var article string
+	article = ""
+	for _, v := range sections {
+		article = article + v
+	}
+	cli.CreateArticle(keyWord, article)
 }
 
 //CrawArticle 根据关键词爬虫文章链接
@@ -98,9 +141,11 @@ func (cli *SpiderCli) CrawArticle(keyword string) {
 		return
 	}
 	err := json.Unmarshal([]byte(respon), cli.ResponMsg)
-	common.CheckError(err, "CrawArticle")
-	baiduAddr := cli.ResponMsg.BaiduAddr
-	fmt.Println("baidu addr:", baiduAddr)
+	res = common.CheckError(err, "CrawArticle")
+	if res {
+		cli.ProcessResponse()
+	}
+	//baiduAddr := cli.ResponMsg.BaiduAddr
 }
 
 func (cli *SpiderCli) TestAbstrator() {

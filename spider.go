@@ -24,6 +24,7 @@ func main() {
 	dbs.MysqlDb.CreateMysqlDb("www_abc_com")
 	spiderCli := controlers.NewSpiderCli(dbs)
 	//spiderCli.Articles.CreateArticle()
+	//spiderCli.CreateArticle()
 	//controlers.RequestUrl2Io("地球村")
 	//return
 	if len(os.Args) > 1 {

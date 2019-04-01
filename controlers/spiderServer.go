@@ -136,6 +136,7 @@ func (spiderSer *SpiderServer) CrawPage(keyword string) bool {
 	} else {
 		spiderSer.ResponMsg.Status = "fail"
 	}
+	spiderSer.ResponMsg.Keyword = keyword
 	return searchRes
 	/*
 		SearchFunc := spiderSer.Searchers["baidu"].SearchFunc // 搜索函数

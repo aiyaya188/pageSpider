@@ -39,9 +39,11 @@ func NewArticle(db *database.DbEngin) *ArticleObj {
 }
 
 //CreateArticle  把文章写入数据库
-func (article *ArticleObj) CreateArticle() {
-	article.articleTable.Title = "abcdefefefe"
-	article.articleTable.ArticleContent = "ssdfdfdfdfdfddfabcdefefefe"
+func (article *ArticleObj) CreateArticle(title string, content string) {
+	article.articleTable.Title = title
+	article.articleTable.ArticleContent = content
+	//article.articleTable.Summary = string(content[100:201])
+	article.articleTable.Summary = title
 	article.articleTable.Status = 1
 	article.articleTable.ReadTimes = 123
 	article.articleTable.ForumId = 1
