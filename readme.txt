@@ -17,3 +17,5 @@ https://github.com/hunterhug/marmot.git
      长尾词，权重，序号，相关词
 8,  栏目-长尾词对应表
      栏目-长尾词序列 （上一次该栏目用到的长尾词序列）
+	 ----------------------
+	 gprc,yaml,nsq队列,govendor,pg数据库,ansible,cron
