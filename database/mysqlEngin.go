@@ -9,6 +9,7 @@ package database
 
 import (
 	"fmt"
+	"os/exec"
 
 	"../common"
 	"github.com/jinzhu/gorm"
@@ -26,14 +27,25 @@ func NewMysqlDb() *MysqlDb {
 	return mysqlDb
 }
 
-//CreateMysqlDb 根据数据库名字创建数据库链接
-func (mysqlDb *MysqlDb) CreateMysqlDb(dbName string) bool {
+func (mysqlDb *MysqlDb) InitDbs() {
 
+	//manageName := common.GetConfig("mysql", "managerName").String()
+
+}
+
+//CreateMysqlDb 根据数据库名字创建数据库链接
+func (mysqlDb *MysqlDb) CreateMysqlDb(dbName string, newDb bool, migration []interface{}) bool {
 	userName := common.GetConfig("mysql", "user").String()
-	fmt.Println("userName:", userName)
+	//fmt.Println("userName:", userName)
 	userPasswd := common.GetConfig("mysql", "passwd").String()
 
-	fmt.Println("userPasswd:", userPasswd)
+	if newDb {
+		//创建数据库
+		dbCtreateStr := "mysql -u" + userName + " -p" + userPasswd + " -e " + `"create database IF NOT EXISTS ` + dbName + ` DEFAULT CHARSET utf8 COLLATE utf8_general_ci"`
+		//fmt.Println("createDb:", dbCtreateStr)
+		exec.Command("bash", "-c", dbCtreateStr).CombinedOutput()
+	}
+	//fmt.Println("userPasswd:", userPasswd)
 	dbStr := fmt.Sprintf("%s:%s@tcp(127.0.0.1:3306)/%s?charset=utf8&parseTime=True&loc=Local", userName, userPasswd, dbName)
 	db, err := gorm.Open("mysql", dbStr)
 	res := common.CheckError(err, "mysqlEngin:CreateMysqlDb")
@@ -55,6 +67,7 @@ func (mysqlDb *MysqlDb) CreateMysqlDb(dbName string) bool {
 	*/
 	db.DB().SetMaxIdleConns(10)
 	db.DB().SetMaxOpenConns(200)
+	//db.AutoMigrate()
 	mysqlDb.dbs[dbName] = db
 	return true
 }

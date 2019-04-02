@@ -11,6 +11,7 @@ package controlers
 import (
 	"errors"
 	"math/rand"
+	"strings"
 )
 
 type Utils struct {
@@ -37,4 +38,10 @@ func (utils *Utils) Random(strings []string, length int) ([]string, error) {
 		res = append(res, strings[i])
 	}
 	return res, nil
+}
+
+//GetDbByHost 根据域名获取数据库名
+func (utils *Utils) GetDbByHost(hostName string) string {
+	dbname := strings.Replace(hostName, `.`, `_`, -1)
+	return dbname
 }
