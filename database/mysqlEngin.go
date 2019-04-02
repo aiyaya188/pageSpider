@@ -12,6 +12,7 @@ import (
 	"os/exec"
 
 	"../common"
+	"../definition"
 	"github.com/jinzhu/gorm"
 )
 
@@ -29,12 +30,18 @@ func NewMysqlDb() *MysqlDb {
 
 func (mysqlDb *MysqlDb) InitDbs() {
 
-	//manageName := common.GetConfig("mysql", "managerName").String()
+	manageName := common.GetConfig("mysql", "managerName").String()
+	var tables []interface{}
+	tables = append(tables, &definition.KeywordTable{})
+
+	//DBM.AutoMigrate(&definition.Videos{})
+	mysqlDb.CreateMysqlDb(manageName, true, tables)
 
 }
 
 //CreateMysqlDb 根据数据库名字创建数据库链接
 func (mysqlDb *MysqlDb) CreateMysqlDb(dbName string, newDb bool, migration []interface{}) bool {
+	fmt.Println("migration:", migration)
 	userName := common.GetConfig("mysql", "user").String()
 	//fmt.Println("userName:", userName)
 	userPasswd := common.GetConfig("mysql", "passwd").String()
@@ -42,7 +49,7 @@ func (mysqlDb *MysqlDb) CreateMysqlDb(dbName string, newDb bool, migration []int
 	if newDb {
 		//创建数据库
 		dbCtreateStr := "mysql -u" + userName + " -p" + userPasswd + " -e " + `"create database IF NOT EXISTS ` + dbName + ` DEFAULT CHARSET utf8 COLLATE utf8_general_ci"`
-		//fmt.Println("createDb:", dbCtreateStr)
+		fmt.Println("createDb:", dbCtreateStr)
 		exec.Command("bash", "-c", dbCtreateStr).CombinedOutput()
 	}
 	//fmt.Println("userPasswd:", userPasswd)
@@ -69,6 +76,9 @@ func (mysqlDb *MysqlDb) CreateMysqlDb(dbName string, newDb bool, migration []int
 	db.DB().SetMaxOpenConns(200)
 	//db.AutoMigrate()
 	mysqlDb.dbs[dbName] = db
+	if newDb {
+		db.AutoMigrate(migration)
+	}
 	return true
 }
 

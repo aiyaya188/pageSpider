@@ -21,7 +21,9 @@ func main() {
 		keyword2 := "风水怎么看"
 	*/
 	dbs := database.NewDbEngin()
-	dbs.MysqlDb.CreateMysqlDb("www_abc_com")
+	//dbs.MysqlDb.CreateMysqlDb("www_abc_com")
+	dbs.MysqlDb.InitDbs()
+	return
 	spiderCli := controlers.NewSpiderCli(dbs)
 	//spiderCli.Articles.CreateArticle()
 	//spiderCli.CreateArticle()
