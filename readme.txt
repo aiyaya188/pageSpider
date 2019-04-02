@@ -18,3 +18,4 @@ https://github.com/hunterhug/marmot.git
 8,  栏目-长尾词对应表
      栏目-长尾词序列 （上一次该栏目用到的长尾词序列）
 9, 每个域名起一个进程进行爬取
+	 gprc,yaml,nsq队列,govendor,pg数据库,ansible,cron
