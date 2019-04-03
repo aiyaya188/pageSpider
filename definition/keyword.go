@@ -32,3 +32,8 @@ type KeyWordArticleTable struct {
 	Access    uint
 	BaiduRec  bool
 }
+
+type Sites struct {
+	gorm.Model
+	Host string `gorm:"size:255"`
+}

@@ -32,16 +32,19 @@ func (mysqlDb *MysqlDb) InitDbs() {
 
 	manageName := common.GetConfig("mysql", "managerName").String()
 	var tables []interface{}
-	tables = append(tables, &definition.KeywordTable{})
-
-	//DBM.AutoMigrate(&definition.Videos{})
-	mysqlDb.CreateMysqlDb(manageName, true, tables)
+	tables = append(tables, definition.KeywordTable{})
+	tables = append(tables, definition.KeyWordArticleTable{})
+	tables = append(tables, definition.KeywordQueTable{})
+	tables = append(tables, definition.RelateKeyTable{})
+	tables = append(tables, definition.Sites{})
+	//mysqlDb.CreateMysqlDb(manageName, true, definition.KeyWordArticleTable{})
+	mysqlDb.CreateMysqlDb(manageName, true, tables) //需要做创建数据库和自动迁徙
 
 }
 
 //CreateMysqlDb 根据数据库名字创建数据库链接
 func (mysqlDb *MysqlDb) CreateMysqlDb(dbName string, newDb bool, migration []interface{}) bool {
-	fmt.Println("migration:", migration)
+	//fmt.Println("migration:", migration[0])
 	userName := common.GetConfig("mysql", "user").String()
 	//fmt.Println("userName:", userName)
 	userPasswd := common.GetConfig("mysql", "passwd").String()
@@ -49,7 +52,7 @@ func (mysqlDb *MysqlDb) CreateMysqlDb(dbName string, newDb bool, migration []int
 	if newDb {
 		//创建数据库
 		dbCtreateStr := "mysql -u" + userName + " -p" + userPasswd + " -e " + `"create database IF NOT EXISTS ` + dbName + ` DEFAULT CHARSET utf8 COLLATE utf8_general_ci"`
-		fmt.Println("createDb:", dbCtreateStr)
+		//fmt.Println("createDb:", dbCtreateStr)
 		exec.Command("bash", "-c", dbCtreateStr).CombinedOutput()
 	}
 	//fmt.Println("userPasswd:", userPasswd)
@@ -77,7 +80,9 @@ func (mysqlDb *MysqlDb) CreateMysqlDb(dbName string, newDb bool, migration []int
 	//db.AutoMigrate()
 	mysqlDb.dbs[dbName] = db
 	if newDb {
-		db.AutoMigrate(migration)
+		for _, v := range migration {
+			db.AutoMigrate(v)
+		}
 	}
 	return true
 }
