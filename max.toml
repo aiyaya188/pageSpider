@@ -1,0 +1,3 @@
+	MaxIdle=32
+	MaxConns=100
+	MaxLifetimei=30
